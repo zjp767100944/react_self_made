@@ -26,6 +26,15 @@ module.exports = {
         // 排除node_modules底下的
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/, // 正则匹配文件路径
+        exclude: /node_modules/,
+        use: [
+          // loader生效是从下往上的
+          'style-loader',
+          'css-loader',
+        ],
+      },
     ],
   },
   plugins: [
@@ -49,5 +58,8 @@ module.exports = {
     },
     inline: true,
     hot: true,
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
 };
