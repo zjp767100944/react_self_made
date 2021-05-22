@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, './src/index.tsx'),
@@ -33,6 +34,10 @@ module.exports = {
       template: './src/index.html',
       inject: true,
     }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['./dist'],
+    }),
+    // 参数是一个数组，数组中是需要删除的目录名
   ],
   devServer: {
     host: 'localhost',
