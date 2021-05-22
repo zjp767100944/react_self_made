@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.join(__dirname, './src/index.js'),
+  entry: path.join(__dirname, './src/index.tsx'),
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, './dist'),
@@ -13,6 +13,17 @@ module.exports = {
         test: /\.js$/,
         use: ['babel-loader'],
         include: path.join(__dirname, './src'),
+      },
+      {
+        test: /\.(j|t)sx?$/,
+        include: [path.resolve(__dirname, './src')],
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
+        // 排除node_modules底下的
+        exclude: /node_modules/,
       },
     ],
   },
