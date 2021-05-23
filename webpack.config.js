@@ -2,11 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const bundleFolderName = './build';
+
 module.exports = {
   entry: path.join(__dirname, './src/index.tsx'),
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, './dist'),
+    path: path.join(__dirname, bundleFolderName),
   },
   module: {
     rules: [
@@ -35,6 +37,11 @@ module.exports = {
           'css-loader',
         ],
       },
+      {
+        test: /\.scss$/,
+        include: path.join(__dirname, './src'), // 只让loader解析我们src底下自己写的文件
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
     ],
   },
   plugins: [
@@ -44,7 +51,7 @@ module.exports = {
       inject: true,
     }),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['./dist'],
+      cleanOnceBeforeBuildPatterns: [bundleFolderName],
     }),
     // 参数是一个数组，数组中是需要删除的目录名
   ],
