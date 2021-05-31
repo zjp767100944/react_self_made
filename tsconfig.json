@@ -27,7 +27,8 @@
     "experimentalDecorators": true, /* Enables experimental support for ES7 decorators. */
   },
   "include": [
-    "src"
+    "src",
+    "./typings/module.d.ts"//配置的.d.ts文件
   ],
   "exclude": [
     "node_modules"

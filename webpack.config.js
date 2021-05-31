@@ -40,7 +40,16 @@ module.exports = {
       {
         test: /\.scss$/,
         include: path.join(__dirname, './src'), // 只让loader解析我们src底下自己写的文件
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            }
+          }, 
+          'sass-loader'
+        ],
       },
     ],
   },
